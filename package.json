@@ -1,0 +1,27 @@
+{
+    "name": "connect-chaos",
+    "version": "0.0.0",
+    "description": "connect middlware that causes chaos",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Dakuan/connect-chaos.git"
+    },
+    "keywords": [
+        "chaos",
+        "connect"
+    ],
+    "author": {
+        "name": "Dominic Barker",
+        "email": "dom.barker808@gmail.com",
+        "url": "http://www.dombarker.co.uk"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Dakuan/connect-chaos/issues"
+    },
+    "homepage": "https://github.com/Dakuan/connect-chaos"
+}
