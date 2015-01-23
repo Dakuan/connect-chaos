@@ -1,7 +1,7 @@
 connect-chaos
 =============
 
-## Connect middleware that causes chaos
+## Connect / Express middleware that causes chaos
 
 This is loosely inspired by [chaos monkey](https://github.com/Netflix/SimianArmy/wiki/Chaos-Monkey). The basic idea is that you can drop it into your connect / express app and see how your clients get on when things go wrong. You might want to have it enabled by an environment variable you can switch it on and off easily.
 

@@ -50,10 +50,10 @@ function _runOnProp(fn, prop) {
 function _handlersForOptions(opts) {
     return R.reduce(function(memo, pair) {
         if (pair[0](opts)) {
-            memo.push(pair[1](opts))
+            memo.push(pair[1](opts));
         }
         return memo;
-    }, [], potentialHandlers)
+    }, [], potentialHandlers);
 }
 
 // list of all the handlers and the predicates that decide if they are valid
