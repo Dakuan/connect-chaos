@@ -2,7 +2,7 @@ var chaos = require('./index');
 
 chaos({
     error: 400,
-    delay: true
+    delay: 100
 })(null, {
     status: function() {},
     end: function() {}
