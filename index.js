@@ -1,13 +1,10 @@
 var R = require('ramda');
 
 function _delay(time) {
-
-    // console.log(time);
     var time = time || 2000;
-
-    console.log('delaying by ' + time);
     return function(req, res, next) {
         setTimeout(function() {
+            console.log('CHAOS: delaying by ' + time);
             next();
         }, time);
     }
@@ -15,21 +12,11 @@ function _delay(time) {
 
 function _error(code) {
     var code = code || 500;
-    console.log('throwing ' + code);
     return function(req, res, next) {
+        console.log('CHAOS: throwing ' + code);
         res.status(code);
         res.end();
     }
-}
-
-function _funnyInvoke(fn, o) {
-    return function(args) {
-        return fn.call(fn, parseArgs(o.call(o, args)));
-    }
-}
-
-function _buildAction(prop) {
-    return;
 }
 
 function _randomElement(array) {
@@ -40,14 +27,17 @@ function _truthy(val) {
     return !!val;
 }
 
-var isNumber = R.is(Number);
+var parseArgs = R.ifElse(R.is(Number), R.I, R.always(null));
 
-var parseArgs = R.ifElse(isNumber, R.I, R.always(null));
+function runOnProp(fn, prop) {
+    return R.compose(fn, parseArgs, R.prop(prop));
+}
 
 var chaos = R.ifElse(
     _truthy,
     R.cond(
-        [R.has('delay'), _funnyInvoke(_delay, R.prop('delay'))], [R.has('error'), _funnyInvoke(_error, R.prop('error'))]
+        [R.has('delay'), runOnProp(_delay, 'delay')],
+        [R.has('error'), runOnProp(_error, 'error')]
     ),
     _randomElement([_delay, _error])
 );
