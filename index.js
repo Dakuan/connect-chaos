@@ -41,13 +41,13 @@ function _through() {
 
 // returns a function that expects an object with a property containing a config variable
 // if the variable is not a number it is ignored
-function runOnProp(fn, prop) {
+function _runOnProp(fn, prop) {
     var parseArgs = R.ifElse(R.is(Number), R.I, R.always());
     return R.compose(fn, parseArgs, R.prop(prop));
 }
 
 // reduces the list of handlers to those that are valid
-function handlersForOptions(opts) {
+function _handlersForOptions(opts) {
     return R.reduce(function(memo, pair) {
         if (pair[0](opts)) {
             memo.push(pair[1](opts))
@@ -59,8 +59,8 @@ function handlersForOptions(opts) {
 // list of all the handlers and the predicates that decide if they are valid
 var potentialHandlers = [
     [R.always(true), _through],
-    [R.has('delay'), runOnProp(_delay, 'delay')],
-    [R.has('error'), runOnProp(_error, 'error')]
+    [R.has('delay'), _runOnProp(_delay, 'delay')],
+    [R.has('error'), _runOnProp(_error, 'error')]
 ];
 
 // full list of built handlers
@@ -71,32 +71,8 @@ var allHandlers = [_delay(), _error(), _through()];
 // after that, pick a random one and reuturn it
 var chaos = R.compose(
     _randomElement,
-    R.ifElse(_truthy, handlersForOptions, R.always(allHandlers))
+    R.ifElse(_truthy, _handlersForOptions, R.always(allHandlers))
 );
 
 module.exports = chaos;
 
-// use
-
-// // anything can happen
-// root.use(chaos());
-
-// // delays by 2000 ms (default)
-// root.use(chaos({
-//     time: true
-// }));
-
-// // delays by custom time
-// root.use(chaos({
-//     time: 4000
-// }));
-
-// // throws 500 error (default)
-// root.use(chaos({
-//     error: true
-// }));
-
-// // throws custom error code
-// root.use(chaos({
-//     error: 401
-// }));
