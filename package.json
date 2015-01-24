@@ -12,6 +12,9 @@
   },
   "keywords": [
     "chaos",
+    "express",
+    "chaos monkey",
+    "testing",    
     "connect"
   ],
   "author": {
