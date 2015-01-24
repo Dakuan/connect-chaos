@@ -1,7 +1,7 @@
 connect-chaos
 =============
 
-<img src="http://i.imgur.com/jFqfW4e.gif" />
+<img src="http://i.imgur.com/jFqfW4e.gif" width="100%" />
 
 ## Connect / Express middleware that causes chaos
 
