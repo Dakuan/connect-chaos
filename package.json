@@ -1,6 +1,6 @@
 {
   "name": "connect-chaos",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "connect / express middleware that causes chaos",
   "main": "index.js",
   "scripts": {
