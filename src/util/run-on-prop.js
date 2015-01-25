@@ -1,13 +1,16 @@
-var R = require('ramda');
+var R = require('ramda'),
+	Maybe = require('ramda/ext/types/Maybe');
 
 // returns a function that expects an object with a property containing a config variable
 // if the variable is not a number it is ignored
 function _runOnProp(fn, prop) {
-	// if the args aren't a number use null instead
-    var parseArgs = R.ifElse(R.is(Number), R.I, R.always());
-    // if the args are not an object, use empty hash instead
-    var coalesceToObject = R.ifElse(R.is(Object), R.I, R.always({}))
-    return R.compose(fn, parseArgs, R.prop(prop), coalesceToObject);
+    return R.compose(
+    	fn, // apply the function
+    	R.prop('value'), // unwrap the monad
+    	R.map(R.ifElse(R.is(Number), R.I, R.always())), // if the prop isn't a number use undefined
+    	R.map(R.prop(prop)), // get the prop if the argument is truthy
+    	Maybe // Maybe null
+    );
 }
 
 module.exports = _runOnProp;
