@@ -13,7 +13,7 @@ function _truthy(val) {
 
 // calls a method on a object with the args
 // flipped to accept the object last
-var _flipFunc = R.curry(function(method, args, obj){
+var _flipFunc = R.curry(function(method, args, obj) {
     return obj[method].apply(null, args);
 });
 
@@ -28,12 +28,17 @@ var _handlersForOptions = R.curry(function(handlers, opts) {
 // full list of built handlers
 var allHandlers = R.map(R.func('factory'), handlers);
 
-// find the relevent handlers for the provided options and build them
-// if no options are provided, all handlers are built
-// after that, pick a random one and return it
-var chaos = R.compose(
+// pick the handlers that match the args
+var pickFromArgs = R.compose(
     _randomElement,
     R.ifElse(_truthy, _handlersForOptions(handlers), R.always(allHandlers))
 );
+
+var chaos = function(opts) {
+    console.log('CHAOS: Running in CHAOS MODE. Requests will be delayed, error or worse...');
+    return function (req, res, next) {
+        return pickFromArgs(opts).apply(null, arguments);
+    }
+};
 
 module.exports = chaos;
