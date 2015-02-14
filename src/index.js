@@ -1,5 +1,5 @@
 var R = require('ramda'),
-    handlers = require('./src/handlers/handlers');
+    handlers = require('../src/handlers/handlers');
 
 // picks random element from an array
 function _randomElement(array) {
