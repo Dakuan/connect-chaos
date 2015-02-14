@@ -11,6 +11,7 @@ function _truthy(val) {
     return !!val;
 }
 
+
 // calls a method on a object with the args
 // flipped to accept the object last
 var _flipFunc = R.curry(function(method, args, obj) {
