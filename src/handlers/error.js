@@ -10,7 +10,7 @@ var codeMatchingRegex = function(regex) {
     return R.find(function(c) {
         return R.func('test', regex, c);
     }, all);
-}
+};
 
 var parseOpt = R.cond(
     [R.is(Number), R.I], // if number then that pick that error code
