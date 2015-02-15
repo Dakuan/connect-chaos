@@ -17,20 +17,18 @@ var parseOpt = R.cond(
     [R.is(Array), randomElement], // if array pick from those
     [R.is(RegExp), codeMatchingRegex], // if regex then code matching that regex
     [R.alwaysTrue, function() {
-    	return randomElement.call(null, all);
+        return randomElement.call(null, all);
     }] // random error code
 );
 
 // sends an error code
 function _error(code) {
-    var hander = function _errorHandler(req, res, next) {
-        var code = parseOpt(code);
-        console.log('CHAOS: throwing ' + code);
-        res.status(code);
+    return function(req, res, next) {
+        var toThrow = parseOpt(code);
+        console.log('CHAOS: throwing ' + toThrow);
+        res.status(toThrow);
         res.end();
     }
-    hander.code = code;
-    return hander;
 }
 
 module.exports = {

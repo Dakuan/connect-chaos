@@ -1,37 +1,55 @@
 var subject = require('../../src/handlers/error'),
-	R = require('ramda'),
+    R = require('ramda'),
     assert = require('assert');
+
+function assertStatus(handler, expectedCode) {
+    handler(null, {
+        status: function(code) {
+            assert(code === expectedCode);
+        },
+        end: function() {}
+    });
+}
 
 describe("Error handler", function() {
     describe("when a valid number is provided ", function() {
         it("should use that error code", function() {
-            assert(subject.factory({
+            var handler = subject.factory({
                 error: 420
-            }).code === 420);
+            });
+            assertStatus(handler, 420);
         });
     });
 
     describe("when an array is provided", function() {
         it("should use a value from the array", function() {
-            assert(subject.factory({
+            var handler = subject.factory({
                 error: [123]
-            }).code === 123);
+            });
+            assertStatus(handler, 123);
         });
     });
 
     describe("when a regex is provided", function() {
         it("should use a value that matches the regex", function() {
-            assert(subject.factory({
+            var handler = subject.factory({
                 error: /^400/
-            }).code === 400);
+            });
+            assertStatus(handler, 400);
         });
     });
+
     describe("when nothing is provided", function() {
         it("should use a valid error code", function() {
-            var code = subject.factory().code;
-            assert(code >= 400);
-            assert(code <= 506);
-            assert(R.is(Number, code));
+            var handler = subject.factory();
+            handler(null, {
+                status: function(code) {
+                    assert(code >= 400);
+                    assert(code <= 506);
+                    assert(R.is(Number, code));
+                },
+                end: function() {}
+            });
         });
     });
 });
