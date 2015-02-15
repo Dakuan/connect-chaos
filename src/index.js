@@ -1,5 +1,5 @@
 var R = require('ramda'),
-    handlers = require('./src/handlers/handlers');
+    handlers = require('../src/handlers/handlers');
 
 // picks random element from an array
 function _randomElement(array) {
@@ -10,6 +10,7 @@ function _randomElement(array) {
 function _truthy(val) {
     return !!val;
 }
+
 
 // calls a method on a object with the args
 // flipped to accept the object last

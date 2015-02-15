@@ -1,6 +1,6 @@
 var express = require('express'),
     app = express(),
-    chaos = require('../index');
+    chaos = require('../src/index');
 
 app.use(chaos());
 
