@@ -1,6 +1,8 @@
 connect-chaos
 =============
 
+[![Circle CI](https://circleci.com/gh/Dakuan/connect-chaos.svg?style=svg&circle-token=be329dbcfa94b3635df9ae15d1f89133e5b05a95)](https://circleci.com/gh/Dakuan/connect-chaos)
+
 <img src="http://i.imgur.com/jFqfW4e.gif" width="100%" />
 
 ## Connect / Express middleware that causes chaos
