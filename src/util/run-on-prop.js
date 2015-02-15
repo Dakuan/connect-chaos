@@ -7,8 +7,6 @@ function _runOnProp(fn, prop) {
     return R.compose(
     	fn, // apply the function
     	R.prop('value'), // unwrap the monad
-    	// R.map(R.I),
-    	// R.map(R.ifElse(R.is(Number), R.I, R.always())), // if the prop isn't a number use undefined
     	R.map(R.prop(prop)), // get the prop if the argument is truthy
     	Maybe // Maybe null
     );
