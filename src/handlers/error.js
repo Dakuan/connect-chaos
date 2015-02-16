@@ -23,13 +23,21 @@ var parseOpt = R.cond(
 
 // sends an error code
 function _error(code) {
-    return function(req, res, next) {
+
+    function _errorHandler(req, res, next) {
         var toThrow = parseOpt(code);
         console.log('CHAOS: throwing ' + toThrow);
         res.status(toThrow);
         res.end();
     }
+
+    function wrap(req, res, next) {
+        _errorHandler.apply(null, arguments);
+        return _errorHandler;
+    }
+    return wrap;
 }
+
 
 module.exports = {
     predicate: R.has('error'),

@@ -4,7 +4,7 @@
   "description": "connect / express middleware that causes chaos",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha tests/**/*-spec.js"
+    "test": "mocha tests/ --recursive"
   },
   "repository": {
     "type": "git",
