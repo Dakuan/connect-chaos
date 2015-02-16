@@ -7,7 +7,12 @@ function _throughHandler(req, res, next) {
     next();
 }
 
+function wrap(req, res, next) {
+	_throughHandler.apply(null, arguments);
+	return _throughHandler;
+}
+
 module.exports = {
     predicate: R.always(true),
-    factory: R.always(_throughHandler)
+    factory: R.always(wrap)
 };
